@@ -6,7 +6,8 @@ const newBudgetOutput = ref<BudgetOutput>();
 
 export default createStore({
   state: {
-    newBudgetOutput
+    newBudgetOutput,
+    errorMessageArray: "",
   },
   getters: {
   },
