@@ -1,15 +1,11 @@
 
-import BudgetOutput from '@/Types/BudgetOutput'
-import CreditCard from './CreditCard'
-import HelperMethods from './Helpermethods'
-import CreditCardNames from './CreditCardNames'
+
 
 
 interface Budget {
     PayPeriod: number,
     Account1: number,
     Account2: number,
-
 }
 
 
