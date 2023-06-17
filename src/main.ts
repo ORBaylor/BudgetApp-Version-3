@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 
 import App from './App.vue'
+
+
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
@@ -15,5 +17,9 @@ const vuetify = createVuetify({
 
 import router from './router'
 import store from './store'
+import Chart from 'chart.js';
+import 'chartjs-plugin-datalabels';
+
 
 createApp(App).use(store).use(router).use(vuetify).mount('#app')
+
