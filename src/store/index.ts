@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 import BudgetOutput from '@/Types/BudgetOutput'
 import Budget from '@/Types/Budget'
 import CreditCard from '@/Types/CreditCard'
+import CreditCardChartData from '@/Types/CreditCardChartData'
 //import Declarations from "Declarations"
 // import { ComponentCustomProperties } from "vue";
 // import { Store } from "vuex";
@@ -21,6 +22,8 @@ interface RootSate {
   newBudgetOutput: BudgetOutput,
   newBudget: Budget,
   newCreditCard: CreditCard[],
+  newCreditCardChartData: CreditCardChartData[],
+  finalPayPeriod: 1
 
 }
 
@@ -28,11 +31,10 @@ interface RootSate {
 export default createStore<RootSate>({
   state: {
     newBudgetOutput: {} as BudgetOutput,
-    newBudget: {
-
-    } as Budget,
-
+    newBudget: {} as Budget,
     newCreditCard: {} as CreditCard[],
+    newCreditCardChartData: [] as CreditCardChartData[],
+    finalPayPeriod: 1,
 
 
   },

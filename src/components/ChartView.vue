@@ -1,9 +1,17 @@
 <template>
-    <div>
-        <v-card width="300px">
-            <Doughnut :data="Data" :options="chartOptions" />
-        </v-card>
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 30%;">
+        <v-card width="300px" height="50vh" position="fixed">
+            <h4>Apple Card</h4>
+            <v-divider></v-divider>
+            <Doughnut class="elevation-14" style="" :data="Data" :options="chartOptions" />
 
+        </v-card>
+        <div style=" z-index: 999; position: relative; width: 90px;border-radius: 13px; margin-top: 20%; ">
+
+            <label for="cardOA" style=""> Ending Amount</label>
+            <v-divider></v-divider>
+            <p id="cardOA"> {{ EndingAmount }}</p>
+        </div>
     </div>
 </template>
 
@@ -21,23 +29,46 @@ export default defineComponent({
     setup() {
 
 
-        return {}
+
+        const propData = {}
+
+        const StartAmount = 805 as number
+        const AmountToPay = 500 as number
+        const EndingAmount = (AmountToPay == 0 ? 0 : (StartAmount - AmountToPay)) as number;
+        const testLable = `Starting Amount: ${StartAmount}` as string;
+        const EndnigAmountLable = `Amount To Pay: ${AmountToPay}` as string;
+        const Data = {
+            labels: [`${testLable}`, `${EndnigAmountLable}`],
+            datasets: [
+                {
+                    backgroundColor: ['#055C9D', '#7EC8E3'],
+                    data: [StartAmount, AmountToPay]
+                }
+            ]
+        }
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+
+
+        return { Data, chartOptions, StartAmount, AmountToPay, EndingAmount }
     },
     data() {
         return {
-            Data: {
-                labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
-                datasets: [
-                    {
-                        backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-                        data: [60]
-                    }
-                ]
-            },
-            chartOptions: {
-                responsive: true,
-                maintainAspectRatio: false
-            }
+            // Data: {
+            //     labels: [`${testLabel}`],
+            //     datasets: [
+            //         {
+            //             backgroundColor: ['#2c3e50'],
+            //             data: [60]
+            //         }
+            //     ]
+            // },
+            // chartOptions: {
+            //     responsive: true,
+            //     maintainAspectRatio: false
+            // }
         }
     }
 })

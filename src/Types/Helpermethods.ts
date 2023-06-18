@@ -2,6 +2,19 @@
 
 interface HelperMethods {
 
+    ReturnHalf(amount: number): number;
+    ReturnPercentage(amount: number, dividend: number): number;
+    TakeOrAddRent(account: number, option: boolean): number;
+    AddSS(amount: number): number;
+    CanPayMyself(account: number, amount: number): boolean
+    PayCurrentItem(account: number, amount: number): number
+    SubtractAmountFromItem(creditCard: number, amount: number): number
+
+
+
+
+
+
 }
 
 function ReturnHalf(amount: number): number {
@@ -66,6 +79,10 @@ function SubtractAmountFromItem(creditCard: number, amount: number): number {
 
     return creditCard;
 }
+
+
+
+
 
 
 
