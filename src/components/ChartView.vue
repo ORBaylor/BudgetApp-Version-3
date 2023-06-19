@@ -1,12 +1,12 @@
 <template>
     <div
         style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: -50%; margin-left: -50%; ">
-        <v-card class="overflow-visible" style="height: 30vh; width: 37vh; position: fixed; ">
+        <div class="overflow-visible" style="height: 30vh; width: 37vh; position: fixed; ">
             <h4>{{ propData?.Name.toUpperCase() }} ACCOUNT</h4>
             <v-divider></v-divider>
             <Doughnut class=" " style="" :data="Data" :options="chartOptions" />
 
-        </v-card>
+        </div>
         <div style=" z-index: 999; position: relative; width: 90px;border-radius: 13px; margin-top: 70%; ">
 
             <label for="cardOA" style=""> Ending Amount</label>
