@@ -1,12 +1,13 @@
 <template>
-    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 30%;">
-        <v-card width="300px" height="50vh" position="fixed">
-            <h4>Apple Card</h4>
+    <div
+        style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: -50%; margin-left: -50%; ">
+        <v-card class="overflow-visible" style="height: 30vh; width: 37vh; position: fixed; ">
+            <h4>{{ propData?.Name.toUpperCase() }} ACCOUNT</h4>
             <v-divider></v-divider>
-            <Doughnut class="elevation-14" style="" :data="Data" :options="chartOptions" />
+            <Doughnut class=" " style="" :data="Data" :options="chartOptions" />
 
         </v-card>
-        <div style=" z-index: 999; position: relative; width: 90px;border-radius: 13px; margin-top: 20%; ">
+        <div style=" z-index: 999; position: relative; width: 90px;border-radius: 13px; margin-top: 70%; ">
 
             <label for="cardOA" style=""> Ending Amount</label>
             <v-divider></v-divider>
@@ -16,9 +17,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { Doughnut } from 'vue-chartjs'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import CreditCardChartData from '@/Types/CreditCardChartData'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 
@@ -26,16 +28,21 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 export default defineComponent({
     name: 'DoughnutChart',
     components: { Doughnut },
-    setup() {
+    props: {
+        ChartData: {
+            type: Object as PropType<CreditCardChartData>
+        }
+    },
+    setup(props) {
 
 
 
-        const propData = {}
+        const propData = props.ChartData;
 
-        const StartAmount = 805 as number
-        const AmountToPay = 500 as number
+        const StartAmount = propData?.StartAmount as number
+        const AmountToPay = propData?.AmountToPay as number
         const EndingAmount = (AmountToPay == 0 ? 0 : (StartAmount - AmountToPay)) as number;
-        const testLable = `Starting Amount: ${StartAmount}` as string;
+        const testLable = `Starting: ${StartAmount}` as string;
         const EndnigAmountLable = `Amount To Pay: ${AmountToPay}` as string;
         const Data = {
             labels: [`${testLable}`, `${EndnigAmountLable}`],
@@ -48,11 +55,12 @@ export default defineComponent({
         }
         const chartOptions = {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            AnimationEffect: false
         }
 
 
-        return { Data, chartOptions, StartAmount, AmountToPay, EndingAmount }
+        return { Data, chartOptions, StartAmount, AmountToPay, EndingAmount, propData }
     },
     data() {
         return {

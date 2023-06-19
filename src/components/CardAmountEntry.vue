@@ -96,7 +96,7 @@ export default defineComponent({
             TakeOrAddRent(account: number, option: boolean): number {
 
                 if (option == true) {
-                    // account = SubtractAmountFromItem(account, 500);
+                    account = this.SubtractAmountFromItem(account, 500);
                 }
                 else {
                     account = account + 500;
@@ -216,8 +216,8 @@ export default defineComponent({
             }
             this.BudgetEngine(budget, allCards);
 
-            // this.$store.state.newBudget = budget;
-            // this.$store.state.newCreditCard = allCards;
+            this.$store.state.newBudget = budget;
+            this.$store.state.newCreditCard = allCards;
 
             // if ((this.$store.state.newBudget.Account1 > 0 && this.$store.state.newBudget.Account2 > 0) && (this.$store.state.newCreditCard[0].Balance > 0 && this.$store.state.newCreditCard[1].Balance > 0)) {
             //     this.$router.push({ name: 'BudgetView' });
@@ -302,7 +302,7 @@ export default defineComponent({
 
                 const SixtyPercentPAndF = this.Helper.ReturnPercentage(policeAndFIre, 6);
                 budget.Account1 = this.Helper.SubtractAmountFromItem(budget.Account1, this.Helper.ReturnPercentage(SixtyPercentPAndF, 6));
-                budget.Account2 = this.Helper.SubtractAmountFromItem(budget.Account1, this.Helper.ReturnPercentage(SixtyPercentPAndF, 4));
+                budget.Account2 = this.Helper.SubtractAmountFromItem(budget.Account2, this.Helper.ReturnPercentage(SixtyPercentPAndF, 4));
                 policeAndFIre = this.Helper.SubtractAmountFromItem(policeAndFIre, SixtyPercentPAndF);
                 budgetOutCome?.CurrentAmount.set('PoliceAndFire', policeAndFIre);
 
@@ -312,13 +312,13 @@ export default defineComponent({
 
                 const FortyPercentPAndF = this.Helper.ReturnPercentage(policeAndFIre, 4);
                 budget.Account1 = this.Helper.SubtractAmountFromItem(budget.Account1, this.Helper.ReturnHalf(FortyPercentPAndF));
-                budget.Account2 = this.Helper.SubtractAmountFromItem(budget.Account1, this.Helper.ReturnHalf(FortyPercentPAndF));
+                budget.Account2 = this.Helper.SubtractAmountFromItem(budget.Account2, this.Helper.ReturnHalf(FortyPercentPAndF));
                 policeAndFIre = this.Helper.SubtractAmountFromItem(policeAndFIre, FortyPercentPAndF);
                 budgetOutCome?.CurrentAmount.set('PoliceAndFire', policeAndFIre);
 
             }
 
-            if (this.Helper.CanPayMyself(budget.Account2, 350)) {
+            if (this.Helper.CanPayMyself(budget.Account2, 550)) {
 
 
                 budgetOutCome.PayMyself2 = 150;
@@ -439,7 +439,7 @@ export default defineComponent({
                     budgetOutCome.CurrentAmount.set("apple", apple);
                 }
                 else {
-                    if (budget.Account1 > apple) {
+                    if (budget.Account1 > (apple + discover)) {
 
                         budgetOutCome.PayMyself1 = 0;
                         budgetOutCome.AccountOneAppleAmount = apple;
@@ -450,10 +450,8 @@ export default defineComponent({
                     }
                     if (budget.PayPeriod == 2) {
                         if (budget.Account1 >= (this.Helper.ReturnPercentage(apple, 3))) {
-                            if (budgetOutCome.AccountOneAppleAmount !== undefined) {
-                                budgetOutCome.AccountOneAppleAmount = (this.Helper.ReturnPercentage(apple, 3));
-                            }
 
+                            budgetOutCome.AccountOneAppleAmount = (this.Helper.ReturnPercentage(apple, 3));
                             budget.Account1 = this.Helper.SubtractAmountFromItem(budget.Account1, (this.Helper.ReturnPercentage(apple, 3)));
                             apple = this.Helper.SubtractAmountFromItem(apple, (this.Helper.ReturnPercentage(apple, 3)));
                             budgetOutCome.CurrentAmount.set("apple", apple);
@@ -468,7 +466,7 @@ export default defineComponent({
                     }
 
                     let rightAmount = false;
-                    let dividend = 7;
+                    let dividend = 3;
                     while (rightAmount == false) {
                         if (budget.Account1 >= (this.Helper.ReturnPercentage(apple, dividend))) {
                             budgetOutCome.AccountOneAppleAmount = (this.Helper.ReturnPercentage(apple, dividend));
@@ -497,7 +495,7 @@ export default defineComponent({
 
                         budget.Account1 = this.Helper.SubtractAmountFromItem(budget.Account1, (this.Helper.ReturnPercentage(discover, 3)));
                         discover = this.Helper.SubtractAmountFromItem(discover, (this.Helper.ReturnPercentage(discover, 3)));
-                        budgetOutCome?.CurrentAmount.set("discover", discover);
+                        budgetOutCome.CurrentAmount.set("discover", discover);
                     }
                     else {
 
@@ -508,12 +506,12 @@ export default defineComponent({
                 }
                 else {
                     let rightAmount = false;
-                    let dividend = 7;
+                    let dividend = 3;
                     while (rightAmount == false) {
                         if (budget.Account1 > (this.Helper.ReturnPercentage(discover, dividend))) {
                             budget.Account1 = this.Helper.SubtractAmountFromItem(budget.Account1, (this.Helper.ReturnPercentage(discover, dividend)));
                             discover = this.Helper.SubtractAmountFromItem(discover, (this.Helper.ReturnPercentage(discover, dividend)));
-                            budgetOutCome?.CurrentAmount.set("discover", discover);
+                            budgetOutCome.CurrentAmount.set("discover", discover);
                             rightAmount = true;
                         }
                         else {
@@ -526,21 +524,31 @@ export default defineComponent({
 
             }
 
-            for (const [key, value] of budgetOutCome.CurrentAmount) {
-                this.newCreditCardChartData.forEach((chartData) => {
-                    if (key.toLowerCase().includes(chartData.Name.toLowerCase())) {
-                        console.log('Made it here ')
-                        chartData.AmountToPay = value.valueOf();
-                    }
-                })
-                // console.log(key)
-                // console.log(value)
+            // for (const [key, value] of budgetOutCome.CurrentAmount) {
+            //     this.newCreditCardChartData.forEach((chartData) => {
+            //         if (key.toLowerCase().includes(chartData.Name.toLowerCase())) {
+            //             console.log('Made it here ')
+            //             chartData.AmountToPay = value.valueOf();
+            //         }
+            //     })
+            //     // console.log(key)
+            //     // console.log(value)
+            // }
+
+
+            // console.log(this.newCreditCardChartData);
+            // console.log(budgetOutCome);
+            // console.log(this.SubmitChartData(budgetOutCome));
+            // console.log(this.$store.state.newCreditCardChartData);
+
+            if ((this.SubmitChartData(budgetOutCome)) && (budget.Account1 > 0 && budget.Account2 > 0)) {
+                this.$store.state.newBudgetOutput = budgetOutCome;
+                console.log(this.$store.state.newBudgetOutput)
+                this.$router.push({ name: 'BudgetView' });
             }
-
-
-            console.log(this.newCreditCardChartData);
-            console.log(budgetOutCome);
-            this.SubmitChartData(budgetOutCome);
+            else {
+                //Do something
+            }
 
         },
         SubmitChartData(budetOutcome: BudgetOutput): boolean {
@@ -549,12 +557,21 @@ export default defineComponent({
             for (const [key, value] of budetOutcome.CurrentAmount) {
                 this.newCreditCardChartData.forEach((chartData) => {
                     if (key.toLowerCase().includes(chartData.Name.toLowerCase())) {
-                        console.log('Made it here ')
+                        // console.log('Made it here ')
                         chartData.AmountToPay = value.valueOf();
                     }
                 })
                 // console.log(key)
                 // console.log(value)
+            }
+
+            this.$store.state.newCreditCardChartData = this.newCreditCardChartData;
+
+            if (this.$store.state.newCreditCardChartData.length > 0) {
+                goodSave = true;
+            }
+            else {
+                goodSave = false
             }
 
             return goodSave;
