@@ -1,9 +1,9 @@
 <template>
     <div class="hello" style="display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
 
-        <v-sheet :elevation="17" :width="375" rounded
+        <v-sheet :class="payPeriod == true ? 'v-sheet-pay1' : 'v-sheet-pay2'" :elevation="17" :width="375" rounded
             style="display: flex; flex-direction: column; justify-content: center; height: 80vh;">
-            <v-card class="mx-auto" max-width="344" variant="outlined" style=" height: 70vh; width: 80vh;">
+            <v-card class="mx-auto v-card" max-width="344" variant="outlined" style=" height: 70vh; width: 80vh;">
                 <v-card-item>
                     <h5>SELCT PAY PERIOD </h5>
                     <div style="margin-left: 25%;">
@@ -46,12 +46,14 @@
                 <v-card-actions>
 
                 </v-card-actions>
+
             </v-card>
 
             <!-- to="/about" -->
 
-            <v-btn v-on:click="SubmitBudet(newBudget, Cards)" v-ripple variant="outlined"
-                style="margin-left: 28%; width: 170px; margin-top: 3%;">Submit</v-btn>
+
+            <v-btn elevation="8" :id="payPeriod == true ? '' : 'V-button'" v-on:click="SubmitBudet(newBudget, Cards)"
+                v-ripple variant="outlined" style="margin-left: 28%; width: 170px; margin-top: 3%; ">Submit</v-btn>
 
 
         </v-sheet>
@@ -107,7 +109,8 @@ export default defineComponent({
 
             AddSS(amount: number): number {
 
-                return (amount + 100);
+                amount = amount + 100;
+                return amount;
             },
 
 
@@ -214,10 +217,10 @@ export default defineComponent({
             else {
                 budget.PayPeriod = 2
             }
-            this.BudgetEngine(budget, allCards);
 
             this.$store.state.newBudget = budget;
             this.$store.state.newCreditCard = allCards;
+            this.BudgetEngine(budget, allCards);
 
             // if ((this.$store.state.newBudget.Account1 > 0 && this.$store.state.newBudget.Account2 > 0) && (this.$store.state.newCreditCard[0].Balance > 0 && this.$store.state.newCreditCard[1].Balance > 0)) {
             //     this.$router.push({ name: 'BudgetView' });
@@ -250,7 +253,13 @@ export default defineComponent({
             allCredidCards.forEach((card) => {
 
                 if (card.Name.startsWith('police')) {
-                    policeAndFIre = card.Balance
+                    if (budget.PayPeriod == 2) {
+                        policeAndFIre = (Number(card.Balance) + 100)
+                    }
+                    else {
+                        policeAndFIre = card.Balance
+                    }
+
                 }
                 else if (card.Name.startsWith('apple')) {
                     apple = card.Balance
@@ -267,12 +276,7 @@ export default defineComponent({
             })
 
 
-            if (budget.PayPeriod == 1) {
-                //Do nothing For Now
-            }
-            else if (budget.PayPeriod == 2) {
-                policeAndFIre = this.Helper.AddSS(policeAndFIre);
-            }
+
 
             budget.Account1 = this.Helper.TakeOrAddRent(budget.Account1, true);
             budgetOutCome.OriginalAmount.set('apple', apple);
@@ -588,11 +592,29 @@ h5 {
     margin-top: 3%;
 }
 
-body {
-    background-color: #67B7D1;
+
+
+
+.v-card {
+    background-color: whitesmoke;
 }
 
-nav {
-    background-color: #67B7D1;
+/* PayPeriod 1 */
+/*  linear-gradient(rgb(61, 131, 223), rgb(169, 175, 196), #a9afc4) */
+.v-sheet-pay1 {
+
+    background-image:
+        linear-gradient(rgb(61, 131, 223), rgb(169, 175, 196), #a9afc4)
+}
+
+.v-sheet-pay2 {
+
+    background-image:
+        linear-gradient(hsl(172, 76%, 27%), hwb(156 2% 87%))
+}
+
+#V-button {
+    background-color: hsl(170, 92%, 31%);
+
 }
 </style>

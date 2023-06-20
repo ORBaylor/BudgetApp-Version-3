@@ -40,14 +40,16 @@ export default defineComponent({
         const propData = props.ChartData;
 
         const StartAmount = propData?.StartAmount as number
-        const AmountToPay = propData?.AmountToPay as number
-        const EndingAmount = (AmountToPay == 0 ? 0 : (StartAmount - AmountToPay)) as number;
+        const AmountToPay = (propData?.AmountToPay == 0 ? StartAmount : propData?.AmountToPay) as number
+        const EndingAmount = (AmountToPay == StartAmount ? 'Payed Off' : (StartAmount - AmountToPay)) as number | string;
         const testLable = `Starting: ${StartAmount}` as string;
-        const EndnigAmountLable = `Amount To Pay: ${AmountToPay}` as string;
+        const EndnigAmountLable = `Paying: ${AmountToPay}` as string;
         const Data = {
             labels: [`${testLable}`, `${EndnigAmountLable}`],
             datasets: [
                 {
+                    //rgb(13, 128, 112), hsl(172, 89%, 17%)
+                    //'#055C9D', '#7EC8E3'
                     backgroundColor: ['#055C9D', '#7EC8E3'],
                     data: [StartAmount, AmountToPay]
                 }

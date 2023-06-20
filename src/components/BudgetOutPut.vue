@@ -1,6 +1,6 @@
 <template>
     <div style="width: auto; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <v-card height="83vh" width="40vh">
+        <v-card height="83vh" width="40vh" :class="newBudgetOutputStore.PayPeriod == 1 ? 'v-sheet-pay1' : 'v-sheet-pay2'">
             <h4>Budget Results</h4>
 
 
@@ -22,11 +22,11 @@
 
 
             <div style="display: flex; flex-direction: row;">
-                <div class="mx-auto" max-width="344" style="width: 20vh;">
-                    <v-card-item>
+                <div class="mx-auto" max-width="344" style="width: 20vh;" elevation="18">
+                    <v-card-item elevation="18">
                         <div>
                             <div class="text-overline mb-1">
-                                Account 1
+                                <v-card-title class="text-h6 text-md-h5 text-lg-h4"> Account 1</v-card-title>
                             </div>
                             <v-divider></v-divider>
                             <v-expansion-panels variant="popout"
@@ -63,7 +63,8 @@
                     <v-card-item>
                         <div>
                             <div class="text-overline mb-1">
-                                Account 2
+                                <v-card-title class="text-h6 text-md-h5 text-lg-h4"> Account 2</v-card-title>
+
                             </div>
                             <v-divider></v-divider>
                             <v-expansion-panels variant="popout"
@@ -98,7 +99,8 @@
             </div>
 
 
-            <v-btn :to="{ name: 'home' }" v-ripple variant="outlined" style=" width: 170px; margin-top: 3%;">START
+            <v-btn elevation="8" :id="newBudgetOutputStore.PayPeriod == 1 ? ' ' : 'V-button'" :to="{ name: 'home' }"
+                v-ripple variant="outlined" style=" width: 170px; margin-top: 3%;">START
                 OVER</v-btn>
 
 
@@ -159,4 +161,21 @@ export default defineComponent({
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.v-sheet-pay1 {
+
+    background-image:
+        linear-gradient(rgb(61, 131, 223), rgb(169, 175, 196), #a9afc4)
+}
+
+.v-sheet-pay2 {
+
+    background-image:
+        linear-gradient(rgb(13, 128, 112), hsl(172, 89%, 17%))
+}
+
+#V-button {
+    background-color: hsl(170, 92%, 31%);
+
+}
+</style>
