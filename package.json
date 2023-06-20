@@ -2,8 +2,9 @@
   "name": "budgetappv3",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ORBaylor.github.io/<BudgetApp.github.io>",
+  "homepage": "https://ORBaylor.github.io/BudgetApp.github.io",
   "scripts": {
+    "start": "vue-cli-service build",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "deploy": "gh-pages -d dist"
