@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://ORBaylor.github.io/BudgetApp.github.io",
   "scripts": {
-    "start": "vue-cli-service build",
+    "start": "",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "deploy": "gh-pages -d dist"
