@@ -101,7 +101,7 @@
 
             <v-btn elevation="8" :id="newBudgetOutputStore.PayPeriod == 1 ? ' ' : 'V-button'" :to="{ name: 'home' }"
                 v-ripple variant="outlined" style=" width: 170px; margin-top: 3%;">START
-                Over!!</v-btn>
+                Over</v-btn>
 
 
         </v-card>
