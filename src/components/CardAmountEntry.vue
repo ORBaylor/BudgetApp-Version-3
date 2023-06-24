@@ -1,18 +1,16 @@
 <template>
-    <div class="hello" style="display: flex; flex-direction: column; justify-content: flex-end; align-items: center;">
+    <div class="hello" style=" ">
 
-        <v-sheet :class="payPeriod == true ? 'v-sheet-pay1' : 'v-sheet-pay2'" :elevation="17" :width="375" rounded
-            style="display: flex; flex-direction: column; justify-content: center; height: 80vh;">
-            <v-card class="mx-auto v-card" max-width="344" variant="outlined" style=" height: 70vh; width: 80vh;">
-                <v-card-item>
-                    <h5>SELCT PAY PERIOD </h5>
-                    <div style="margin-left: 25%;">
+        <v-sheet :class="payPeriod == true ? 'v-sheet-pay1' : 'v-sheet-pay2'" :elevation="17" rounded
+            style="display: flex; flex-direction: column; justify-content: center; align-content: center; width: 45vh; height:auto ; ">
+            <v-card class="mx-auto v-card" max-width="344" variant="outlined" style=" height: auto; width: 43vh;">
+                <v-card-item style="height: auto;">
+                    <h5 style="margin-bottom: -6%;">SELCT PAY PERIOD </h5>
 
-                    </div>
-                    <v-switch style="margin-left: 25%;" v-model="payPeriod" hide-details inset true-value="2"
-                        false-value="1" :label="`Pay Periods: ${Number(payPeriod)}`"></v-switch>
+                    <v-switch style="margin-left: 25%; margin-bottom: -3%;" v-model="payPeriod" hide-details inset
+                        true-value="2" false-value="1" :label="`Pay Periods: ${Number(payPeriod)}`"></v-switch>
                     <v-divider></v-divider>
-                    <h5>ENTER ACCOUNT AMOUNTS</h5>
+                    <h5 style="margin-bottom: -3%;">ENTER ACCOUNT AMOUNTS</h5>
                     <v-form>
                         <v-container>
                             <v-row style="display: flex; flex-direction: column;">
@@ -20,7 +18,7 @@
                                     <v-text-field v-model="newBudget.Account1" :counter="10" label="Account 1"
                                         required></v-text-field>
                                 </v-col>
-                                <v-col style="height: 30px; margin-bottom: 15%;">
+                                <v-col style="height: 20px; margin-bottom: 15%;">
                                     <v-text-field v-model="newBudget.Account2" :counter="10" label="Account 2:"
                                         required></v-text-field>
                                 </v-col>
@@ -28,11 +26,11 @@
                         </v-container>
                     </v-form>
                     <v-divider></v-divider>
-                    <h5>ENTER CREDIT CARD AMOUNTS</h5>
+                    <h5 style="margin-bottom: -3%;">ENTER CREDIT CARD AMOUNTS</h5>
                     <v-form>
                         <v-container>
                             <v-row style="display: flex; flex-direction: column;">
-                                <v-col style="height: 20px; margin-bottom: 10%;" v-for="(card, index) in Cards">
+                                <v-col style="height: 10px; margin-bottom: 11%;" v-for="(card, index) in Cards">
                                     <v-text-field v-model="card.Balance" :label="card.Name" required>
 
                                     </v-text-field>
@@ -44,7 +42,9 @@
                 </v-card-item>
 
                 <v-card-actions>
-
+                    <v-btn elevation="8" :id="payPeriod == true ? 'V-button-1' : 'V-button-2'"
+                        v-on:click="SubmitBudet(newBudget, Cards)" v-ripple variant="outlined"
+                        style=" width: 170px;   left: 26%;">Submit</v-btn>
                 </v-card-actions>
 
             </v-card>
@@ -52,8 +52,7 @@
             <!-- to="/about" -->
 
 
-            <v-btn elevation="8" :id="payPeriod == true ? '' : 'V-button'" v-on:click="SubmitBudet(newBudget, Cards)"
-                v-ripple variant="outlined" style="margin-left: 28%; width: 170px; margin-top: 3%; ">Submit</v-btn>
+
 
 
         </v-sheet>
@@ -613,8 +612,12 @@ h5 {
         linear-gradient(hsl(172, 76%, 27%), hwb(156 2% 87%))
 }
 
-#V-button {
+#V-button-2 {
     background-color: hsl(170, 92%, 31%);
 
+}
+
+#V-button-1 {
+    background-color: rgb(169, 175, 196);
 }
 </style>

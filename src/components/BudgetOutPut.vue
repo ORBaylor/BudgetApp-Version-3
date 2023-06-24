@@ -1,5 +1,6 @@
 <template>
-    <div style="width: auto; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <div
+        style="width: auto; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: -5% ;">
         <v-card height="83vh" width="40vh" :class="newBudgetOutputStore.PayPeriod == 1 ? 'v-sheet-pay1' : 'v-sheet-pay2'">
             <h4>Budget Results</h4>
 
@@ -22,7 +23,7 @@
 
 
             <div style="display: flex; flex-direction: row;">
-                <div class="mx-auto" max-width="344" style="width: 20vh;" elevation="18">
+                <div class="mx-auto" max-width="344" style="width: auto;" elevation="18">
                     <v-card-item elevation="18">
                         <div>
                             <div class="text-overline mb-1">
@@ -59,7 +60,7 @@
                 </div>
 
                 <v-divider vertical></v-divider>
-                <div class="mx-auto" max-width="344" style="width: 20vh;">
+                <div class="mx-auto" max-width="344" style="width: auto;">
                     <v-card-item>
                         <div>
                             <div class="text-overline mb-1">
@@ -100,7 +101,7 @@
 
 
             <v-btn elevation="8" :id="newBudgetOutputStore.PayPeriod == 1 ? ' ' : 'V-button'" :to="{ name: 'home' }"
-                v-ripple variant="outlined" style=" width: 170px; margin-top: 3%;">START
+                v-ripple variant="outlined" style=" width: 170px; ">START
                 OVER!</v-btn>
 
 

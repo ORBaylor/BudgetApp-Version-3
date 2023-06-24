@@ -1,8 +1,10 @@
 <template>
-  <nav>
+  <div id="app">
+    <nav>
 
-  </nav>
-  <router-view />
+    </nav>
+    <router-view />
+  </div>
 </template>
 
 <style>
@@ -17,6 +19,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
 }
 
